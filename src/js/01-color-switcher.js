@@ -10,7 +10,7 @@ function turnOnInterval() {
     intervalId = setInterval(() => {
         document.body.style.backgroundColor = getRandomHexColor();
     }, 1000);
-    refs.btnStart.setAttribute('disabled', 0);
+    refs.btnStart.setAttribute('disabled', true);
 }
 function turnOffInterval() {
     clearInterval(intervalId);
