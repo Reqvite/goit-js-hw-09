@@ -2,6 +2,7 @@ const refs = {
     btnStart: document.querySelector('[data-start]'),
     btnStop: document.querySelector('[data-stop]')
 }
+let intervalId = null;
 
 refs.btnStart.addEventListener('click', turnOnInterval)
 refs.btnStop.addEventListener('click', turnOffInterval)
