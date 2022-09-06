@@ -41,7 +41,7 @@ function turnOnTimer(maxTimerTime) {
     const startTime = new Date()
     timerId = setInterval(() => {
         const deltaTime = new Date() - startTime;
-        currenntTime = Math.abs(maxTimerTime) - deltaTime;
+        let currenntTime = Math.abs(maxTimerTime) - deltaTime;
         const { days, hours, minutes, seconds } = convertMs(currenntTime); 
         updateTimer(convertMs(currenntTime))
         if (seconds === '00') {
