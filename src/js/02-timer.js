@@ -18,8 +18,8 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
     onClose(selectedDates) { 
-        const currenntTime = new Date();
-        const timerValue = currenntTime - selectedDates[0]
+        const currentTime = new Date();
+        const timerValue = currentTime - selectedDates[0]
         if (timerValue > 0) {
             refs.btnStart.disabled = true;
             Notiflix.Notify.failure('Please choose a date in the future');
@@ -41,9 +41,9 @@ function turnOnTimer(maxTimerTime) {
     const startTime = new Date()
     timerId = setInterval(() => {
         const deltaTime = new Date() - startTime;
-        let currenntTime = Math.abs(maxTimerTime) - deltaTime;
-        const { days, hours, minutes, seconds } = convertMs(currenntTime); 
-        updateTimer(convertMs(currenntTime))
+        let currentTime = Math.abs(maxTimerTime) - deltaTime;
+        const { days, hours, minutes, seconds } = convertMs(currentTime); 
+        updateTimer(convertMs(currentTime))
         if (seconds === '00') {
             clearInterval(timerId);
             Notiflix.Notify.info('Timer is over'); 
