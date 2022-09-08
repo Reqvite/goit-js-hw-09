@@ -12,12 +12,16 @@ function getData(e) {
 }
 
 function turnOn(e) {
-  e.preventDefault() 
+  e.preventDefault()
 
   let delay = Number(formData.delay);
   let step = Number(formData.step);
   let amount = Number(formData.amount);
 
+  if (delay <= 0 || step <= 0 || amount <= 0) {
+    Notiflix.Notify.info('Enter a positive numbers.'); 
+    return;
+  }
 
     for (let position = 1; position <= amount; position += 1) {
     createPromise(position, delay)
