@@ -11,7 +11,8 @@ function onSubmit(e) {
   let amount = Number(formRef[2].value);
 
     if (delay <= 0 || step <= 0 || amount <= 0) {
-    Notiflix.Notify.info('Enter a positive numbers.'); 
+      Notiflix.Notify.info('Enter a positive numbers.'); 
+      return;
     }
   
   for (let position = 1; position <= amount; position += 1){
