@@ -13,11 +13,11 @@ refs.btnStart.disabled = true;
 let maxTimerTime = 0;
 
 const options = {
-  enableTime: true,
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-    onClose(selectedDates) { 
+    enableTime: true,
+    time_24hr: true,
+    defaultDate: new Date(),
+    minuteIncrement: 1,
+    onClose(selectedDates) {
         const currentTime = new Date();
         const timerValue = currentTime - selectedDates[0]
         if (timerValue > 0) {
@@ -27,7 +27,7 @@ const options = {
             refs.btnStart.disabled = false;
             maxTimerTime = timerValue;
         }
-  },
+    },
 };
 flatpickr(refs.input, options);
 
@@ -42,13 +42,14 @@ function turnOnTimer(maxTimerTime) {
     timerId = setInterval(() => {
         const deltaTime = new Date() - startTime;
         let currentTime = Math.abs(maxTimerTime) - deltaTime;
-        const { days, hours, minutes, seconds } = convertMs(currentTime); 
+        const { days, hours, minutes, seconds } = convertMs(currentTime);
         updateTimer(convertMs(currentTime))
-        if (seconds === '00') {
+        if (currentTime <= 0) {
+            updateTimer(convertMs(0))
             clearInterval(timerId);
-            Notiflix.Notify.info('Timer is over'); 
+            Notiflix.Notify.info('Timer is over');
         }
-    }, 1000)   
+    }, 1000)
 }
 
 function updateTimer({ days, hours, minutes, seconds }) {
@@ -58,17 +59,18 @@ function updateTimer({ days, hours, minutes, seconds }) {
     refs.timerInterface[3].textContent = seconds;
 }
 
-function addLeadingZero(maxTimerTime){
+function addLeadingZero(maxTimerTime) {
     return String(maxTimerTime).padStart(2, '0');
 }
 function convertMs(ms) {
-  const second = 1000;
-  const minute = second * 60;
-  const hour = minute * 60;
-  const day = hour * 24;
-  const days = addLeadingZero(Math.floor(ms / day));
-  const hours = addLeadingZero(Math.floor((ms % day) / hour));
-  const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
-  const seconds = addLeadingZero(Math.floor((((ms % day) % hour) % minute) / second));
-  return { days, hours, minutes, seconds };
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+    const days = addLeadingZero(Math.floor(ms / day));
+    const hours = addLeadingZero(Math.floor((ms % day) / hour));
+    const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
+    const seconds = addLeadingZero(Math.floor((((ms % day) % hour) % minute) / second));
+    return { days, hours, minutes, seconds };
 }
+
